@@ -1,4 +1,4 @@
-version: "4.12.0"
+version: '4.12.0'
 
 services:
   database:
@@ -10,6 +10,7 @@ services:
       POSTGRES_DB: vial
     ports:
       - 5432:5432
+    restart: unless-stopped
   nodeserver:
     container_name: vial-backend-b-api
     image: node:18.15.0
@@ -26,3 +27,4 @@ services:
       - database
     ports:
       - 8080:8080
+    restart: unless-stopped
