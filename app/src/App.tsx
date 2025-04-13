@@ -1,11 +1,14 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { FormList } from "@components";
 
-function App() {
+const queryClient = new QueryClient();
+
+const App = () => {
   return (
-    <div>
+    <QueryClientProvider client={queryClient}>
       <FormList />
-    </div>
+    </QueryClientProvider>
   );
-}
+};
 
 export default App;

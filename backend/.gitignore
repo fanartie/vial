@@ -2,6 +2,6 @@
 .sql
 .DS_Store
 .vscode
-node_modules/
+node_modules
 prisma/dbml
-dist/
+dist

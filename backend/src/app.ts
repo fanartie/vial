@@ -1,16 +1,16 @@
 import fastify from 'fastify'
+import fastifySensible from '@fastify/sensible'
 
 import formRoutes from './routes/form'
 import sourceRecordRoutes from './routes/sourceRecord'
-import sourceDataRoutes from './routes/sourceData'
 import errorHandler from './errors'
 
 function build(opts = {}) {
   const app = fastify(opts)
+  app.register(fastifySensible)
 
   app.register(formRoutes, { prefix: '/form' })
-  app.register(sourceRecordRoutes, { prefix: '/sourceRecord' })
-  app.register(sourceDataRoutes, { prefix: '/sourceData' })
+  app.register(sourceRecordRoutes, { prefix: '/source-record' })
 
   app.setErrorHandler(errorHandler)
 

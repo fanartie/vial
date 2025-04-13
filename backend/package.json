@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@fastify/cors": "^10.0.2",
+    "@fastify/sensible": "^6.0.3",
     "@prisma/client": "^6.2.0",
     "@sinclair/typebox": "^0.33.7",
     "env-cmd": "^10.1.0",
