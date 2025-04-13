@@ -1,6 +1,9 @@
 import { Grid } from "@mui/material";
 import { FormBuilderProvider } from "./context";
 
+import Editor from "./Editor";
+import "./index.css";
+
 const FormBuilder = () => {
   return (
     <FormBuilderProvider>
@@ -9,7 +12,7 @@ const FormBuilder = () => {
           <div>Sidebar</div>
         </Grid>
         <Grid size={6}>
-          <div>Drafting</div>
+          <Editor />
         </Grid>
         <Grid size={3}>Preview</Grid>
       </Grid>
