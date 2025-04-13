@@ -3,12 +3,10 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { Item } from "@components";
+import { Item, BtnAddItem, BtnPreview } from "@components";
 import { closestCorners, DndContext } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import "./index.css";
-import { Icon, Box, IconButton } from "@mui/material";
-import { AddItem } from "../AddItem";
 
 export const Editor = () => {
   const { items, setState }: any = useAppContext();
@@ -41,7 +39,8 @@ export const Editor = () => {
           ))}
         </SortableContext>
       </DndContext>
-      <AddItem />
+      <BtnAddItem />
+      <BtnPreview />
     </div>
   );
 };

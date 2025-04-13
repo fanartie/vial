@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { IconButton, Menu, MenuItem, Box, Icon } from "@mui/material";
 import { useAppContext } from "@hooks";
 
-export const AddItem = () => {
+export const BtnAddItem = () => {
   const { setState }: any = useAppContext();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
