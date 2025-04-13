@@ -1,0 +1,20 @@
+html {
+  overflow-x: hidden;
+}
+
+body .body-inner,
+body #wrapper {
+  padding: 0;
+  margin: 0;
+}
+
+body .container-wide {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+.row {
+  padding-left: 15px;
+  padding-right: 15px;
+}
