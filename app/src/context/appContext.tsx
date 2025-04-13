@@ -1,6 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
-export const FormBuilderContext = createContext({});
+export const AppContext = createContext({});
 
 const defaultState = {
   items: [
@@ -36,16 +36,12 @@ const defaultState = {
   ],
 };
 
-export const FormBuilderProvider = ({ children }: any) => {
+export const AppProvider = ({ children }: any) => {
   const [state, setState] = useState(defaultState);
 
   return (
-    <FormBuilderContext.Provider value={{ ...state, setState }}>
+    <AppContext.Provider value={{ ...state, setState }}>
       {children}
-    </FormBuilderContext.Provider>
+    </AppContext.Provider>
   );
-};
-
-export const useFormBuilderContext = () => {
-  return useContext(FormBuilderContext); // it returns {...state, setState}
 };

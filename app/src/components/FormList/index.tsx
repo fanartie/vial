@@ -1,6 +1,6 @@
 import { useFormData } from "@hooks";
 
-const FormList = () => {
+export const FormList = () => {
   const { isLoading, isError, form } = useFormData({});
 
   if (isLoading) return <div>Loading...</div>;
@@ -20,5 +20,3 @@ const FormList = () => {
     </div>
   );
 };
-
-export default FormList;

@@ -1,14 +1,17 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { FormBuilder } from "@components";
+import { FormBuilder } from "@pages";
+import { AppProvider } from "@context";
 import "./App.css";
 
 const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <FormBuilder />
-    </QueryClientProvider>
+    <AppProvider>
+      <QueryClientProvider client={queryClient}>
+        <FormBuilder />
+      </QueryClientProvider>
+    </AppProvider>
   );
 };
 

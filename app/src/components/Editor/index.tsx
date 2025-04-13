@@ -1,14 +1,15 @@
-import { useFormBuilderContext } from "./context";
+import { useAppContext } from "@hooks";
 import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import Item from "./Item";
+import { Item } from "@components";
 import { closestCorners, DndContext } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
+import "./index.css";
 
-const Editor = () => {
-  const { items, setState }: any = useFormBuilderContext();
+export const Editor = () => {
+  const { items, setState }: any = useAppContext();
 
   const getItemPos = (id: any) =>
     items.findIndex((item: any) => item.id === id);
@@ -41,4 +42,3 @@ const Editor = () => {
     </div>
   );
 };
-export default Editor;

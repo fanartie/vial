@@ -1,12 +1,9 @@
 import { Grid } from "@mui/material";
-import { FormBuilderProvider } from "./context";
+import { Editor } from "@components";
 
-import Editor from "./Editor";
-import "./index.css";
-
-const FormBuilder = () => {
+export const FormBuilder = () => {
   return (
-    <FormBuilderProvider>
+    <div>
       <Grid container spacing={2}>
         <Grid size={3}>
           <div>Sidebar</div>
@@ -16,8 +13,6 @@ const FormBuilder = () => {
         </Grid>
         <Grid size={3}>Preview</Grid>
       </Grid>
-    </FormBuilderProvider>
+    </div>
   );
 };
-
-export default FormBuilder;
