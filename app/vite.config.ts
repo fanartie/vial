@@ -17,6 +17,7 @@ export default defineConfig({
       "@context": path.resolve(__dirname, "src/context"),
       "@pages": path.resolve(__dirname, "src/pages"),
       "@types": path.resolve(__dirname, "src/types"),
+      "@fields": path.resolve(__dirname, "src/fields"),
     },
   },
   plugins: [react()],

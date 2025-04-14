@@ -30,7 +30,8 @@
       "@api": ["./src/api"],
       "@context": ["./src/context"],
       "@pages": ["./src/pages"],
-      "@types": ["./src/types"]
+      "@types": ["./src/types"],
+      "@fields": ["./src/fields"]
     }
   },
   "include": ["src"]

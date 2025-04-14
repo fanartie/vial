@@ -25,7 +25,6 @@ export const FormList = () => {
             <TableRow>
               <TableCell>id</TableCell>
               <TableCell>Name</TableCell>
-              <TableCell>Description</TableCell>
               <TableCell>Records</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
@@ -40,7 +39,6 @@ export const FormList = () => {
                   {row.id}
                 </TableCell>
                 <TableCell>{row.name}</TableCell>
-                <TableCell>{row.description}</TableCell>
                 <TableCell>123</TableCell>
                 <TableCell>Edit, Clone, Delete</TableCell>
               </TableRow>

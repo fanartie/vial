@@ -6,7 +6,7 @@ import {
 import { ItemConfig, BtnAddItem } from "@components";
 import { closestCorners, DndContext } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
-import { ButtonGroup, Button, Box } from "@mui/material";
+import { ButtonGroup, Button, Box, TextField } from "@mui/material";
 import "./index.css";
 
 export const Editor = () => {
@@ -39,6 +39,20 @@ export const Editor = () => {
 
   return (
     <div className="column">
+      <TextField
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setState((prevState: any) => ({
+            ...prevState,
+            formName: e.target.value,
+          }))
+        }
+        required
+        label="Form Name"
+        helperText="Enter the name of the form"
+        variant="standard"
+        placeholder="My Form"
+        style={{ width: "200px" }}
+      />
       <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
         <SortableContext items={items} strategy={verticalListSortingStrategy}>
           {items.map((item: any) => (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import {
@@ -16,6 +16,7 @@ import {
   Delete as DeleteIcon,
   DragIndicator as DragHandleIcon,
   ExpandMore as ExpandMoreIcon,
+  ExpandLess as ExpandLessIcon,
 } from "@mui/icons-material";
 import { useAppContext } from "@hooks";
 import { enum_ItemType } from "@types";
@@ -56,10 +57,10 @@ export const ItemConfig = (props: any) => {
     setExpanded((prev) => !prev);
   };
 
-  const onEntry = (itemId: string, propertyName: string, value: any) => {
+  const onEntry = (propertyName: string, value: any) => {
     setState((prevState: any) => {
       const newItems = prevState.items.map((i: any) => {
-        if (i.id === itemId) {
+        if (i.id === item.id) {
           return {
             ...i,
             [propertyName]: value,
@@ -73,6 +74,94 @@ export const ItemConfig = (props: any) => {
       };
     });
   };
+
+  const BasicInfo = useMemo(() => {
+    return (
+      <Box display="flex" alignItems="center" gap={2} flexGrow={1}>
+        <TextField
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onEntry("type", e.target.value)
+          }
+          required
+          select
+          label="Type"
+          defaultValue={item.type}
+          variant="standard"
+          style={{ width: "140px" }}
+        >
+          {itemTypeOptions.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        <TextField
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onEntry("label", e.target.value)
+          }
+          label="Label"
+          defaultValue={item.label}
+          variant="standard"
+          style={{ width: "140px" }}
+        />
+      </Box>
+    );
+  }, [item.type, item.label]);
+
+  const AdditionalInfo1 = useMemo(() => {
+    return (
+      <Box display="flex" alignItems="center" gap={2} flexGrow={1}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              defaultValue={item.required}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                onEntry("required", e.target.checked)
+              }
+            />
+          }
+          label="Required"
+        />
+        <TextField
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onEntry("placeholder", e.target.value)
+          }
+          label="Placeholder"
+          defaultValue={item.placeholder}
+          placeholder="Placeholder"
+          variant="standard"
+        />
+      </Box>
+    );
+  }, [item.required, item.placeholder]);
+
+  const NumberRange = useMemo(() => {
+    return (
+      <Box display="flex" alignItems="center" gap={2} flexGrow={1}>
+        <TextField
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onEntry("min", e.target.value)
+          }
+          label="Min"
+          type="number"
+          defaultValue={item.min}
+          variant="standard"
+          style={{ width: "140px" }}
+        />
+        <TextField
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onEntry("max", e.target.value)
+          }
+          label="Max"
+          type="number"
+          defaultValue={item.max}
+          variant="standard"
+          style={{ width: "140px" }}
+        />
+      </Box>
+    );
+  }, [item.min, item.max]);
+
   return (
     <Box
       display="flex"
@@ -99,61 +188,15 @@ export const ItemConfig = (props: any) => {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Box display="flex" alignItems="center" gap={2} flexGrow={1}>
-            <TextField
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                onEntry(item.id, "type", e.target.value)
-              }
-              required
-              select
-              label="Type"
-              defaultValue={enum_ItemType.TEXT}
-              variant="standard"
-              style={{ width: "100px" }}
-            >
-              {itemTypeOptions.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                onEntry(item.id, "label", e.target.value)
-              }
-              label="Label"
-              defaultValue={item.label}
-              variant="standard"
-              style={{ width: "140px" }}
-            />
-          </Box>
+          {BasicInfo}
           <div onClick={handleChange}>
-            <ExpandMoreIcon />
+            {expanded && <ExpandLessIcon />}
+            {!expanded && <ExpandMoreIcon />}
           </div>
         </AccordionSummary>
         <AccordionDetails>
-          <Box display="flex" alignItems="center" gap={2} flexGrow={1}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  defaultValue={item.required}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    onEntry(item.id, "required", e.target.checked)
-                  }
-                />
-              }
-              label="Required"
-            />
-            <TextField
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                onEntry(item.id, "placeholder", e.target.value)
-              }
-              label="Placeholder"
-              defaultValue={item.placeholder}
-              placeholder="Placeholder"
-              variant="standard"
-            />
-          </Box>
+          {AdditionalInfo1}
+          {item.type === enum_ItemType.NUMBER && NumberRange}
         </AccordionDetails>
       </Accordion>
       <IconButton {...attributes} {...listeners}>
