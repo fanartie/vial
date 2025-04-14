@@ -10,7 +10,7 @@ export const BtnAddItem = () => {
     setState((prevState: any) => {
       const newItem = {
         id: uuidv4(),
-        label: `Field: ${prevState.items.length + 1}`,
+        question: "Question",
         type: enum_ItemType.TEXT,
         placeholder: "",
         required: false,

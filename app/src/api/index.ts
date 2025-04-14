@@ -1,1 +1,2 @@
-export { default as getForm } from './getForm';
+export * from "./getForm";
+export * from "./postForm";

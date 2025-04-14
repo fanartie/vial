@@ -97,41 +97,77 @@ export const ItemConfig = (props: any) => {
         </TextField>
         <TextField
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            onEntry("label", e.target.value)
+            onEntry("fieldName", e.target.value)
           }
-          label="Label"
-          defaultValue={item.label}
+          required
+          label="Field Name"
+          defaultValue={item.fieldName}
           variant="standard"
           style={{ width: "140px" }}
         />
       </Box>
     );
-  }, [item.type, item.label]);
+  }, [item.type, item.fieldName]);
+
+  const Question = useMemo(() => {
+    return (
+      <>
+        <Box display="flex" alignItems="center" gap={2} flexGrow={1}>
+          <TextField
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              onEntry("question", e.target.value)
+            }
+            required
+            label="Question"
+            defaultValue={item.question}
+            variant="standard"
+            style={{ width: "80%" }}
+          />
+        </Box>
+        <Box display="flex" alignItems="center" gap={2} flexGrow={1}>
+          <TextField
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              onEntry("helperText", e.target.value)
+            }
+            label="Helper Text"
+            defaultValue={item.helperText}
+            variant="standard"
+            style={{ width: "80%" }}
+          />
+        </Box>
+      </>
+    );
+  }, [item.question, item.helper]);
 
   const AdditionalInfo1 = useMemo(() => {
     return (
-      <Box display="flex" alignItems="center" gap={2} flexGrow={1}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              defaultValue={item.required}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                onEntry("required", e.target.checked)
-              }
-            />
-          }
-          label="Required"
-        />
-        <TextField
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            onEntry("placeholder", e.target.value)
-          }
-          label="Placeholder"
-          defaultValue={item.placeholder}
-          placeholder="Placeholder"
-          variant="standard"
-        />
-      </Box>
+      <>
+        <Box display="flex" alignItems="center" gap={2} flexGrow={1}>
+          <TextField
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              onEntry("placeholder", e.target.value)
+            }
+            label="Placeholder"
+            defaultValue={item.placeholder}
+            placeholder="Placeholder"
+            variant="standard"
+            style={{ width: "80%" }}
+          />
+        </Box>
+        <Box display="flex" alignItems="center" gap={2} flexGrow={1}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                defaultValue={item.required}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  onEntry("required", e.target.checked)
+                }
+              />
+            }
+            label="Required"
+          />
+        </Box>
+      </>
     );
   }, [item.required, item.placeholder]);
 
@@ -189,12 +225,14 @@ export const ItemConfig = (props: any) => {
           id="panel1bh-header"
         >
           {BasicInfo}
+
           <div onClick={handleChange}>
             {expanded && <ExpandLessIcon />}
             {!expanded && <ExpandMoreIcon />}
           </div>
         </AccordionSummary>
         <AccordionDetails>
+          {Question}
           {AdditionalInfo1}
           {item.type === enum_ItemType.NUMBER && NumberRange}
         </AccordionDetails>

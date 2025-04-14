@@ -4,7 +4,7 @@ import { Form as Entity } from '@prisma/client'
 
 import prisma from '../db/db_client'
 import { serializer } from './middleware/pre_serializer'
-import { IEntityId } from './schemas/common'
+import { EntityId, IEntityId } from './schemas/common'
 import { ApiError } from '../errors'
 
 async function formRoutes(app: FastifyInstance) {
@@ -45,6 +45,37 @@ async function formRoutes(app: FastifyInstance) {
       } catch (err: any) {
         log.error({ err }, err.message)
         throw new ApiError('failed to fetch ' + tableName, 400)
+      }
+    },
+  })
+
+  app.post<{
+    Params: Entity
+    Reply: Entity
+  }>('/', {
+    async handler(req, reply) {
+      try {
+        const { body } = req
+        const { name, fields } = body as {
+          name: string
+          fields: any[]
+        }
+
+        if (!name || !fields) {
+          throw app.httpErrors.badRequest(
+            'Invalid input: Name and fields are required'
+          )
+        }
+
+        const newData = { name, fields }
+
+        const newForm = await prisma[tableName].create({
+          data: newData,
+        })
+
+        return reply.status(201).send(newForm)
+      } catch (error) {
+        throw error
       }
     },
   })

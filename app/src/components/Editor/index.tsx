@@ -8,9 +8,11 @@ import { closestCorners, DndContext } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import { ButtonGroup, Button, Box, TextField } from "@mui/material";
 import "./index.css";
+import { postForm } from "@api";
+import { v4 as uuidv4 } from "uuid";
 
 export const Editor = () => {
-  const { items, setState }: any = useAppContext();
+  const { items, formId, formName, setState }: any = useAppContext();
 
   console.log("items", items);
 
@@ -34,6 +36,33 @@ export const Editor = () => {
   };
 
   const onBack = () => {
+    window.location.href = "/home";
+  };
+
+  const onSave = async () => {
+    let fields: any = {};
+    items.forEach((item: any, index: number) => {
+      let fieldName = item.fieldName || "";
+      if (fieldName === "") {
+        fieldName = `field-${index + 1}`;
+      }
+
+      fields[fieldName] = {
+        question: item.question,
+        type: item.type,
+        placeholder: item.placeholder,
+        required: item.required,
+        min: item.min,
+        max: item.max,
+        helperText: item.helperText,
+      };
+    });
+    const payload: any = {
+      name: formName,
+      fields,
+    };
+
+    await postForm(payload);
     window.location.href = "/home";
   };
 
@@ -70,7 +99,7 @@ export const Editor = () => {
       >
         <ButtonGroup variant="text" aria-label="Basic button group">
           <Button onClick={onBack}>Back</Button>
-          {items.length > 0 && <Button>Save</Button>}
+          {items.length > 0 && <Button onClick={onSave}>Save</Button>}
         </ButtonGroup>
       </Box>
     </div>

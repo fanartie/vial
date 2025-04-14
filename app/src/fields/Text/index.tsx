@@ -14,10 +14,11 @@ export const Text = (props: any) => {
         // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         //   onEntry(item.id, "placeholder", e.target.value)
         // }
-        label={item.label}
+        label={item.question}
         defaultValue={item.value}
         placeholder={item.placeholder}
         required={item.required}
+        helperText={item.helperText}
         variant="standard"
       />
     </Box>
