@@ -3,9 +3,10 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { Item, BtnAddItem, BtnPreview } from "@components";
+import { Item, BtnAddItem } from "@components";
 import { closestCorners, DndContext } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
+import { ButtonGroup, Button, Box } from "@mui/material";
 import "./index.css";
 
 export const Editor = () => {
@@ -30,6 +31,10 @@ export const Editor = () => {
     });
   };
 
+  const onBack = () => {
+    window.location.href = "/home";
+  };
+
   return (
     <div className="column">
       <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
@@ -40,7 +45,19 @@ export const Editor = () => {
         </SortableContext>
       </DndContext>
       <BtnAddItem />
-      <BtnPreview />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ButtonGroup variant="text" aria-label="Basic button group">
+          <Button onClick={onBack}>Back</Button>
+          {items.length > 0 && <Button>Preview</Button>}
+          {items.length > 0 && <Button>Save</Button>}
+        </ButtonGroup>
+      </Box>
     </div>
   );
 };

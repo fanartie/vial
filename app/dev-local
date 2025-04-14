@@ -1,6 +1,6 @@
 pm2 delete all
 pm2 start 'yarn dev' \
   --name app-vial \
-  --watch
-  --ignore-watch="node_modules logs .git"
+  --watch \
+  --ignore-watch="node_modules logs .git dist"
 pm2 save 

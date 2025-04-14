@@ -1,0 +1,37 @@
+services:
+  database:
+    container_name: vial-backend-b
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: vial
+      POSTGRES_PASSWORD: vial
+      POSTGRES_DB: vial
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+  nodeserver:
+    container_name: vial-backend-b-api
+    image: node:18.15.0
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    command: npm run dev
+    volumes:
+      - ./backend/:/usr/app/
+      - /usr/app/node_modules
+    env_file:
+      - .env
+    depends_on:
+      - database
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+  webserver:
+    container_name: vial-app
+    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    ports:
+      - "0.0.0.0:80:80" # Bind only to IPv4
+    restart: unless-stopped
