@@ -1,8 +1,8 @@
-import { Box } from "@mui/material";
 import { useAppContext } from "@hooks";
-
-export const DateTime = (props: any) => {
+import { Box, FormControlLabel, Switch } from "@mui/material";
+export const Boolean = (props: any) => {
   const { item } = props;
+
   const { setState }: any = useAppContext();
 
   const onEntry = (itemId: string, value: any) => {
@@ -11,7 +11,7 @@ export const DateTime = (props: any) => {
         if (i.id === itemId) {
           return {
             ...i,
-            value: value,
+            value: value || false,
           };
         }
         return i;
@@ -32,14 +32,17 @@ export const DateTime = (props: any) => {
       p={2}
       borderRadius={2}
     >
-      <input
-        type="date"
-        defaultValue={item.value}
-        placeholder={item.placeholder}
+      <FormControlLabel
         required={item.required}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          onEntry(item.id, e.target.value)
+        control={
+          <Switch
+            // checked={item.value || false}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              onEntry(item.id, e.target.checked)
+            }
+          />
         }
+        label={item.question}
       />
     </Box>
   );

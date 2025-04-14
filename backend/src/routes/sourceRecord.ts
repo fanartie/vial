@@ -23,7 +23,7 @@ async function sourceRecordRoutes(app: FastifyInstance) {
       const { id } = params
       log.debug('get ' + tableName + ' by id')
       try {
-        const record = await prisma[tableName].findUniqueOrThrow({
+        const record = await prisma.sourceRecord.findUniqueOrThrow({
           where: { id },
           include: {
             sourceData: true,
@@ -38,12 +38,42 @@ async function sourceRecordRoutes(app: FastifyInstance) {
   })
 
   app.get<{
+    Params: IEntityId
+    Reply: any[]
+  }>('/form/:id', {
+    // this is formId
+    async handler(req, reply) {
+      const { params } = req
+      const { id } = params
+      log.debug('get ' + tableName + ' by formId = ' + id)
+      try {
+        // Fetch SourceRecords for the given form ID
+        const sourceRecords = await prisma.sourceRecord.findMany({
+          where: {
+            formId: id,
+          },
+          select: {
+            id: true, // Only fetch fields from SourceRecord (no joins)
+            formId: true,
+            createdAt: true,
+          },
+        })
+
+        reply.send(sourceRecords)
+      } catch (err: any) {
+        log.error({ err }, err.message)
+        throw new ApiError('failed to fetch ' + tableName, 400)
+      }
+    },
+  })
+
+  app.get<{
     Reply: Entity[]
   }>('/', {
     async handler(req, reply) {
       log.debug('get all ', tableName)
       try {
-        const records = await prisma[tableName].findMany({
+        const records = await prisma.sourceRecord.findMany({
           include: {
             sourceData: true,
           },

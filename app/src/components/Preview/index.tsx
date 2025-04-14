@@ -1,6 +1,6 @@
 import { useAppContext } from "@hooks";
 import { enum_ItemType } from "@types";
-import { Text, Number, DateTime } from "@fields";
+import { Text, Number, DateTime, Boolean } from "@fields";
 import { Typography, Button } from "@mui/material";
 import { postSourceRecord } from "@api";
 
@@ -56,6 +56,8 @@ export const Preview = (param: any) => {
               return <Number key={key} item={item} />;
             case enum_ItemType.DATETIME:
               return <DateTime key={key} item={item} />;
+            case enum_ItemType.BOOLEAN:
+              return <Boolean key={key} item={item} />;
             default:
               return <Typography key={key}>invalid type</Typography>;
           }

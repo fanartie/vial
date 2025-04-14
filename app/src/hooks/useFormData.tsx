@@ -9,8 +9,9 @@ export interface IUseFormData {
 export const useFormData = (props: IUseFormData) => {
   const id = props?.id || undefined; // Use the id from props or set it to undefined
   const enabled = props?.enabled || true; //default to true if not provided
+  const key = id ? id : "all";
   const query = useQuery({
-    queryKey: ["todos"],
+    queryKey: ["formData", key],
     queryFn: () => getForm(id),
     enabled,
     refetchOnWindowFocus: true,

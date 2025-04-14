@@ -2,6 +2,7 @@ export enum enum_ItemType {
   TEXT = "text",
   NUMBER = "number",
   DATETIME = "datetime",
+  BOOLEAN = "boolean",
 }
 
 /*

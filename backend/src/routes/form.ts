@@ -23,7 +23,7 @@ async function formRoutes(app: FastifyInstance) {
       const { id } = params
       log.debug('get ' + tableName + ' by id')
       try {
-        const record = await prisma[tableName].findUniqueOrThrow({
+        const record = await prisma.form.findUniqueOrThrow({
           where: { id },
         })
         reply.send(record)
@@ -40,7 +40,7 @@ async function formRoutes(app: FastifyInstance) {
     async handler(req, reply) {
       log.debug('get all ', tableName)
       try {
-        const records = await prisma[tableName].findMany()
+        const records = await prisma.form.findMany()
 
         // Get count of SourceRecords grouped by formId
         const counts = await prisma.sourceRecord.groupBy({
@@ -90,7 +90,7 @@ async function formRoutes(app: FastifyInstance) {
 
         const newData = { name, fields }
 
-        const newForm = await prisma[tableName].create({
+        const newForm = await prisma.form.create({
           data: newData,
         })
 

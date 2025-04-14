@@ -3,6 +3,7 @@ import { Preview } from "@components";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppContext, useFormData } from "@hooks";
+import _ from "lodash";
 
 export const FormFill = () => {
   const { formId } = useParams();
@@ -16,6 +17,7 @@ export const FormFill = () => {
       const { fields } = form;
       const items = Object.keys(fields).map((key) => ({
         id: key,
+        index: fields[key].index,
         fieldName: key,
         question: fields[key].question,
         type: fields[key].type,
@@ -25,9 +27,10 @@ export const FormFill = () => {
         max: fields[key].max,
         helperText: fields[key].helperText,
       }));
+      const sortedItems = _.sortBy(items, ["index"]);
       setState((prevState: any) => ({
         ...prevState,
-        items,
+        items: sortedItems,
         formId: form.id,
         formName: form.name,
       }));

@@ -21,6 +21,7 @@ model Form {
 model SourceRecord {
   id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   formId       String    @map("form_id") @db.Uuid
+  createdAt    DateTime     @default(now()) @map("created_at")
   sourceData   SourceData[]
 
   @@index(formId)

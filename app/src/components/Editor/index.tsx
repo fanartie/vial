@@ -47,6 +47,7 @@ export const Editor = () => {
       }
 
       fields[fieldName] = {
+        index: index + 1,
         question: item.question,
         type: item.type,
         placeholder: item.placeholder,

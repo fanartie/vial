@@ -25,6 +25,9 @@ export const FormList = () => {
   const onFill = (formId: string) => {
     window.location.href = `/form-fill/${formId}`;
   };
+  const onView = (formId: string) => {
+    window.location.href = `/submission/${formId}`;
+  };
 
   return (
     <div>
@@ -48,7 +51,10 @@ export const FormList = () => {
                   {row.id}
                 </TableCell>
                 <TableCell>{row.name}</TableCell>
-                <TableCell>{row.sourceRecordCount}</TableCell>
+                <TableCell>
+                  {row.sourceRecordCount}{" "}
+                  <Button onClick={() => onView(row.id)}>View</Button>
+                </TableCell>
                 <TableCell>
                   <ButtonGroup variant="text" aria-label="Basic button group">
                     <Button onClick={() => onEdit(row.id)}>Edit</Button>

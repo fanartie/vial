@@ -5,7 +5,7 @@ docker system prune -f
 docker compose build
 docker compose up -d
 cd backend
-npm run migrate
-npm run seed
+env $(cat ../.env | xargs) npm run migrate dev
+env $(cat ../.env | xargs) npm run seed
 cd ..
 docker compose logs -f

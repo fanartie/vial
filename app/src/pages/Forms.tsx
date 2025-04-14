@@ -1,10 +1,10 @@
-import { SourceRecordList } from "@components";
-import { Typography, Button, ButtonGroup, Box } from "@mui/material";
-export const Submission = () => {
+import { FormList } from "@components";
+import { Typography, Box, ButtonGroup, Button } from "@mui/material";
+export const Forms = () => {
   return (
     <div>
-      <Typography>Source Record List</Typography>
-      <SourceRecordList />
+      <Typography>Form List</Typography>
+      <FormList />
       <Box
         sx={{
           display: "flex",
@@ -15,10 +15,10 @@ export const Submission = () => {
         <ButtonGroup variant="text" aria-label="Basic button group">
           <Button
             onClick={() => {
-              window.location.href = "/forms";
+              window.location.href = "/";
             }}
           >
-            All Forms
+            Home
           </Button>
         </ButtonGroup>
       </Box>
