@@ -3,7 +3,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { Item, BtnAddItem } from "@components";
+import { ItemConfig, BtnAddItem } from "@components";
 import { closestCorners, DndContext } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import { ButtonGroup, Button, Box } from "@mui/material";
@@ -11,6 +11,8 @@ import "./index.css";
 
 export const Editor = () => {
   const { items, setState }: any = useAppContext();
+
+  console.log("items", items);
 
   const getItemPos = (id: any) =>
     items.findIndex((item: any) => item.id === id);
@@ -40,7 +42,7 @@ export const Editor = () => {
       <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
         <SortableContext items={items} strategy={verticalListSortingStrategy}>
           {items.map((item: any) => (
-            <Item item={item} key={item.id} />
+            <ItemConfig item={item} key={["itemConfig", item.id].join(".")} />
           ))}
         </SortableContext>
       </DndContext>
@@ -54,7 +56,6 @@ export const Editor = () => {
       >
         <ButtonGroup variant="text" aria-label="Basic button group">
           <Button onClick={onBack}>Back</Button>
-          {items.length > 0 && <Button>Preview</Button>}
           {items.length > 0 && <Button>Save</Button>}
         </ButtonGroup>
       </Box>

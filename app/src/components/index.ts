@@ -1,5 +1,6 @@
 export * from "./FormList";
 export * from "./Editor";
-export * from "./Item";
+export * from "./ItemConfig";
 export * from "./BtnAddItem";
 export * from "./BtnAddForm";
+export * from "./Preview";

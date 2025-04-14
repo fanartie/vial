@@ -1,18 +1,21 @@
-import { Grid } from "@mui/material";
-import { Editor } from "@components";
+import { Grid, Box, Paper } from "@mui/material";
+import { Editor, Preview } from "@components";
 
 export const FormBuilder = () => {
   return (
-    <div>
-      <Grid container spacing={2}>
-        <Grid size={3}>
-          <div>Sidebar</div>
+    <Box sx={{ width: "100%" }}>
+      <Grid container spacing={2} style={{ width: "100%" }}>
+        <Grid size={6}>
+          <Paper style={{ padding: "16px", textAlign: "center" }}>
+            <Preview />
+          </Paper>
         </Grid>
         <Grid size={6}>
-          <Editor />
+          <Paper style={{ padding: "16px", textAlign: "center" }}>
+            <Editor />
+          </Paper>
         </Grid>
-        <Grid size={3}>Preview</Grid>
       </Grid>
-    </div>
+    </Box>
   );
 };
