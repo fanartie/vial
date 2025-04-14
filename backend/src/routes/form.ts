@@ -79,6 +79,48 @@ async function formRoutes(app: FastifyInstance) {
       }
     },
   })
+
+  app.patch<{
+    Params: IEntityId
+    Reply: Entity
+  }>('/:id', {
+    async handler(req, reply) {
+      const { params, body } = req
+      const { id } = params
+      const { name, fields } = body as {
+        name: string
+        fields: any[]
+      }
+
+      if (!id) {
+        throw app.httpErrors.badRequest('Invalid input: id is required')
+      }
+
+      try {
+        // Check if form exists
+        const existingForm = await prisma.form.findUnique({
+          where: { id },
+        })
+
+        if (!existingForm) {
+          throw app.httpErrors.notFound('Invalid input: id not found')
+        }
+
+        // Update the form with any provided fields
+        const updatedForm = await prisma.form.update({
+          where: { id },
+          data: {
+            ...(name && { name }),
+            ...(fields && { fields }),
+          },
+        })
+
+        return reply.send(updatedForm)
+      } catch (error) {
+        throw error
+      }
+    },
+  })
 }
 
 export default formRoutes

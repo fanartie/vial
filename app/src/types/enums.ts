@@ -1,6 +1,7 @@
 export enum enum_ItemType {
-  TEXT = "Text",
-  NUMBER = "Number",
+  TEXT = "text",
+  NUMBER = "number",
+  DATETIME = "datetime",
 }
 
 /*

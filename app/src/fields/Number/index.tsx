@@ -26,10 +26,11 @@ export const Number = (props: any) => {
         // }
         onChange={handleChange}
         type="number"
-        label={item.label}
+        label={item.question}
         defaultValue={value}
         placeholder={item.placeholder}
         required={item.required}
+        helperText={item.helperText}
         variant="standard"
       />
     </Box>

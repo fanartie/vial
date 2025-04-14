@@ -7,6 +7,8 @@ import {
   TableHead,
   TableRow,
   Paper,
+  ButtonGroup,
+  Button,
 } from "@mui/material";
 import { BtnAddForm } from "@components";
 
@@ -16,6 +18,10 @@ export const FormList = () => {
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error loading form</div>;
   if (!form) return <div>No form data available</div>;
+
+  const onEdit = (formId: string) => {
+    window.location.href = `/form-builder/${formId}`;
+  };
 
   return (
     <div>
@@ -32,7 +38,7 @@ export const FormList = () => {
           <TableBody>
             {form.map((row: any) => (
               <TableRow
-                key={row.name}
+                key={["formName", row.name].join(".")}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
@@ -40,7 +46,12 @@ export const FormList = () => {
                 </TableCell>
                 <TableCell>{row.name}</TableCell>
                 <TableCell>123</TableCell>
-                <TableCell>Edit, Clone, Delete</TableCell>
+                <TableCell>
+                  {" "}
+                  <ButtonGroup variant="text" aria-label="Basic button group">
+                    <Button onClick={() => onEdit(row.id)}>Edit</Button>
+                  </ButtonGroup>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

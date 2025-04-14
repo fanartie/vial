@@ -8,8 +8,7 @@ import { closestCorners, DndContext } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import { ButtonGroup, Button, Box, TextField } from "@mui/material";
 import "./index.css";
-import { postForm } from "@api";
-import { v4 as uuidv4 } from "uuid";
+import { postForm, patchForm } from "@api";
 
 export const Editor = () => {
   const { items, formId, formName, setState }: any = useAppContext();
@@ -58,11 +57,15 @@ export const Editor = () => {
       };
     });
     const payload: any = {
-      name: formName,
+      name: formName || "New Form",
       fields,
     };
 
-    await postForm(payload);
+    if (formId === "new") {
+      await postForm(payload);
+    } else {
+      await patchForm(formId, payload);
+    }
     window.location.href = "/home";
   };
 
@@ -77,6 +80,7 @@ export const Editor = () => {
         }
         required
         label="Form Name"
+        defaultValue="New Form"
         helperText="Enter the name of the form"
         variant="standard"
         placeholder="My Form"
