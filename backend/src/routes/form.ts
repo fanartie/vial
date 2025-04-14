@@ -41,7 +41,28 @@ async function formRoutes(app: FastifyInstance) {
       log.debug('get all ', tableName)
       try {
         const records = await prisma[tableName].findMany()
-        reply.send(records)
+
+        // Get count of SourceRecords grouped by formId
+        const counts = await prisma.sourceRecord.groupBy({
+          by: ['formId'],
+          _count: {
+            formId: true,
+          },
+        })
+
+        // Create a map for quick lookup
+        const countMap = counts.reduce((acc, curr) => {
+          acc[curr.formId] = curr._count.formId
+          return acc
+        }, {} as Record<string, number>)
+
+        // Combine form data with count
+        const formsWithCounts = records.map(form => ({
+          ...form,
+          sourceRecordCount: countMap[form.id] || 0,
+        }))
+
+        reply.send(formsWithCounts)
       } catch (err: any) {
         log.error({ err }, err.message)
         throw new ApiError('failed to fetch ' + tableName, 400)

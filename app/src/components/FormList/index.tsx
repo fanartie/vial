@@ -22,6 +22,9 @@ export const FormList = () => {
   const onEdit = (formId: string) => {
     window.location.href = `/form-builder/${formId}`;
   };
+  const onFill = (formId: string) => {
+    window.location.href = `/form-fill/${formId}`;
+  };
 
   return (
     <div>
@@ -38,18 +41,18 @@ export const FormList = () => {
           <TableBody>
             {form.map((row: any) => (
               <TableRow
-                key={["formName", row.name].join(".")}
+                key={["formName", row.id].join(".")}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
                   {row.id}
                 </TableCell>
                 <TableCell>{row.name}</TableCell>
-                <TableCell>123</TableCell>
+                <TableCell>{row.sourceRecordCount}</TableCell>
                 <TableCell>
-                  {" "}
                   <ButtonGroup variant="text" aria-label="Basic button group">
                     <Button onClick={() => onEdit(row.id)}>Edit</Button>
+                    <Button onClick={() => onFill(row.id)}>Fill</Button>
                   </ButtonGroup>
                 </TableCell>
               </TableRow>

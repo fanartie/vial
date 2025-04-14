@@ -1,16 +1,51 @@
 import { useAppContext } from "@hooks";
 import { enum_ItemType } from "@types";
 import { Text, Number, DateTime } from "@fields";
-import { Typography } from "@mui/material";
+import { Typography, Button } from "@mui/material";
+import { postSourceRecord } from "@api";
 
-export const Preview = () => {
-  const { items }: any = useAppContext();
+export const Preview = (param: any) => {
+  const { action } = param;
+  const { items, formName, formId }: any = useAppContext();
   if (items.length === 0) {
-    return <Typography>No items to preview</Typography>;
+    if (action === "fill") {
+      return <Typography>No items to fill</Typography>;
+    } else {
+      return <Typography>No items to preview</Typography>;
+    }
   }
+  if (action === "fill") {
+    console.log("items", items);
+  }
+
+  const onSubmit = () => {
+    const sourceData: any = [];
+    items.forEach((item: any) => {
+      const { question, value } = item;
+      sourceData.push({
+        question,
+        answer: value || "",
+      });
+    });
+    const payload = {
+      formId,
+      sourceData,
+    };
+    console.log("onSubmit", payload);
+    postSourceRecord(payload)
+      .then((res) => {
+        console.log("success", res);
+        window.location.href = "/thank-you/" + formId;
+      })
+      .catch((err) => {
+        console.error("error", err);
+      });
+  };
+
   return (
     <div>
-      <Typography>Preview</Typography>
+      {action !== "fill" && <Typography>PREVIEW</Typography>}
+      <Typography>{formName}</Typography>
       <div>
         {items.map((item: any) => {
           const key = ["preview", item.id].join(".");
@@ -26,6 +61,11 @@ export const Preview = () => {
           }
         })}
       </div>
+      {action === "fill" && (
+        <Button onClick={onSubmit} variant="contained">
+          Submit
+        </Button>
+      )}
     </div>
   );
 };

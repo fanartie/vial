@@ -13,6 +13,8 @@ export const useFormData = (props: IUseFormData) => {
     queryKey: ["todos"],
     queryFn: () => getForm(id),
     enabled,
+    refetchOnWindowFocus: true,
+    staleTime: 0,
   });
   const form = query?.data?.data || null;
   return { ...query, form };

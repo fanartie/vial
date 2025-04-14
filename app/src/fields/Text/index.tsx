@@ -1,6 +1,28 @@
+import { useAppContext } from "@hooks";
 import { Box, TextField } from "@mui/material";
 export const Text = (props: any) => {
   const { item } = props;
+
+  const { setState }: any = useAppContext();
+
+  const onEntry = (itemId: string, value: any) => {
+    setState((prevState: any) => {
+      const newItems = prevState.items.map((i: any) => {
+        if (i.id === itemId) {
+          return {
+            ...i,
+            value: value,
+          };
+        }
+        return i;
+      });
+      return {
+        ...prevState,
+        items: newItems,
+      };
+    });
+  };
+
   return (
     <Box
       display="flex"
@@ -11,9 +33,9 @@ export const Text = (props: any) => {
       borderRadius={2}
     >
       <TextField
-        // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-        //   onEntry(item.id, "placeholder", e.target.value)
-        // }
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onEntry(item.id, e.target.value)
+        }
         label={item.question}
         defaultValue={item.value}
         placeholder={item.placeholder}

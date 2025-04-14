@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Home, FormBuilder } from "@pages";
+import { Home, FormBuilder, FormFill, ThankYou, Submission } from "@pages";
 import { AppProvider } from "@context";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -13,10 +13,9 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/form-builder/:formId" element={<FormBuilder />} />
-            <Route
-              path="/form-builder-preview/:formId"
-              element={<FormBuilder />}
-            />
+            <Route path="/form-fill/:formId" element={<FormFill />} />
+            <Route path="/thank-you/:formId" element={<ThankYou />} />
+            <Route path="/submission/:formId" element={<Submission />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </BrowserRouter>
