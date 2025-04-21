@@ -1,5 +1,7 @@
 import { useAppContext } from "@hooks";
 import { Box, TextField } from "@mui/material";
+
+// This component is used to render a text field in the form
 export const Text = (props: any) => {
   const { item } = props;
 

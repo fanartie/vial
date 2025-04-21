@@ -4,6 +4,7 @@ import { Text, Number, DateTime, Boolean } from "@fields";
 import { Typography, Button } from "@mui/material";
 import { postSourceRecord } from "@api";
 
+// This component is used to preview the form and submit the data
 export const Preview = (param: any) => {
   const { action } = param;
   const { items, formName, formId }: any = useAppContext();
@@ -35,7 +36,7 @@ export const Preview = (param: any) => {
     postSourceRecord(payload)
       .then((res) => {
         console.log("success", res);
-        window.location.href = "/thank-you/" + formId;
+        window.location.href = "/thank-you/" + formId; // redirect to thank you page
       })
       .catch((err) => {
         console.error("error", err);

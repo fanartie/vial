@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { useAppContext } from "@hooks";
 
+// This component is used to render a date and time field in the form
 export const DateTime = (props: any) => {
   const { item } = props;
   const { setState }: any = useAppContext();

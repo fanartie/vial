@@ -1,6 +1,7 @@
 import { Box, TextField } from "@mui/material";
 import { useAppContext } from "@hooks";
 
+// This component is used to render a number field in the form
 export const Number = (props: any) => {
   const { item } = props;
   const { setState }: any = useAppContext();

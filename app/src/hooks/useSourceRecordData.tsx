@@ -6,6 +6,7 @@ export interface IUseSourceRecordData {
   enabled?: boolean;
 }
 
+// This hook fetches source record data based on the provided sourceRecordId.
 export const useSourceRecordData = (props: IUseSourceRecordData) => {
   const { sourceRecordId } = props; // Use the id from props or set it to undefined
 

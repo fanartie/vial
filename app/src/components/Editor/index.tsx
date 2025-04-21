@@ -10,6 +10,7 @@ import { ButtonGroup, Button, Box, TextField } from "@mui/material";
 import "./index.css";
 import { postForm, patchForm } from "@api";
 
+// This component is used to edit the form configuration
 export const Editor = () => {
   const { items, formId, formName, setState }: any = useAppContext();
 
@@ -43,11 +44,11 @@ export const Editor = () => {
     items.forEach((item: any, index: number) => {
       let fieldName = item.fieldName || "";
       if (fieldName === "") {
-        fieldName = `field-${index + 1}`;
+        fieldName = `field-${index + 1}`; // default field name, ex: field-1, in case user forget to set
       }
 
       fields[fieldName] = {
-        index: index + 1,
+        index: index + 1, // this is used to sort the fields in the form, to keep the order
         question: item.question,
         type: item.type,
         placeholder: item.placeholder,

@@ -1,4 +1,6 @@
 import { Box, Stack, Typography, Button, ButtonGroup } from "@mui/material";
+
+// This component is used to display the home page
 export const Home = () => {
   return (
     <Box

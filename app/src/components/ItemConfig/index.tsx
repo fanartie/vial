@@ -21,6 +21,7 @@ import {
 import { useAppContext } from "@hooks";
 import { enum_ItemType } from "@types";
 
+// This component is used to configure the properties of a form item
 export const ItemConfig = (props: any) => {
   const { setState }: any = useAppContext();
   const [expanded, setExpanded] = useState(false);
@@ -225,7 +226,6 @@ export const ItemConfig = (props: any) => {
           id="panel1bh-header"
         >
           {BasicInfo}
-
           <div onClick={handleChange}>
             {expanded && <ExpandLessIcon />}
             {!expanded && <ExpandMoreIcon />}

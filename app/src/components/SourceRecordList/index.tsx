@@ -16,6 +16,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useSourceRecordData } from "@hooks";
 
+// This component fetches and displays the list of source records for a given form
 export const SourceRecordList = () => {
   const { formId } = useParams();
   const { isLoading, isError, sourceRecords } = useSourceRecordData_formId({

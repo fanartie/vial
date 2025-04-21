@@ -1,5 +1,7 @@
 import { SourceRecordList } from "@components";
 import { Typography, Button, ButtonGroup, Box } from "@mui/material";
+
+// This component is used to display the submission page
 export const Submission = () => {
   return (
     <div>

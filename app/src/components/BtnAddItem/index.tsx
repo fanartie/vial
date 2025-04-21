@@ -3,6 +3,7 @@ import { useAppContext } from "@hooks";
 import { v4 as uuidv4 } from "uuid";
 import { enum_ItemType } from "@types";
 
+// this component is used to add a new item to the form
 export const BtnAddItem = () => {
   const { setState }: any = useAppContext();
 

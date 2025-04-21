@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useAppContext, useFormData } from "@hooks";
 import _ from "lodash";
 
+// This component is used to fill a form
 export const FormFill = () => {
   const { formId } = useParams();
   const { form, isLoading } = useFormData({

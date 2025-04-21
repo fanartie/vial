@@ -1,5 +1,7 @@
 import { useAppContext } from "@hooks";
 import { Box, FormControlLabel, Switch } from "@mui/material";
+
+// This component is used to render a boolean field in the form
 export const Boolean = (props: any) => {
   const { item } = props;
 

@@ -44,7 +44,7 @@ export const FormList = () => {
           <TableBody>
             {form.map((row: any) => (
               <TableRow
-                key={["formName", row.id].join(".")}
+                key={["formList", row.id].join(".")} // unique key for formList purposes
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">

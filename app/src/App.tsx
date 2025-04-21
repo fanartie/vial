@@ -24,7 +24,7 @@ const App = () => {
             <Route path="/thank-you/:formId" element={<ThankYou />} />
             <Route path="/submission/:formId" element={<Submission />} />
             <Route path="/forms" element={<Forms />} />
-            <Route path="*" element={<Home />} />
+            <Route path="*" element={<Home />} /> {/* Default route */}
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>

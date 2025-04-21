@@ -1,5 +1,7 @@
 import { Box, Stack, Typography, Button, ButtonGroup } from "@mui/material";
 import { useParams } from "react-router-dom";
+
+// This component is used to display the thank you page after form submission
 export const ThankYou = () => {
   const { formId } = useParams();
   return (

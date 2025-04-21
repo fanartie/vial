@@ -1,5 +1,6 @@
 import { IconButton, Box, Icon } from "@mui/material";
 
+// This component is used to add a new form
 export const BtnAddForm = () => {
   const onAddForm = () => {
     window.location.href = "/form-builder/new";

@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const AppContext = createContext({});
 
 const defaultState = {
-  items: [],
+  items: [], // default to an empty array for a new form
 };
 
 export const AppProvider = ({ children }: any) => {
